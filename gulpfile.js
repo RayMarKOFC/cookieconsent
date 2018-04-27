@@ -1,3 +1,4 @@
+/* eslint-env node */
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var minifyJS = require('gulp-uglify');
