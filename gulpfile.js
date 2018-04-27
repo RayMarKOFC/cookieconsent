@@ -78,6 +78,3 @@ gulp.task('build:release', function(callback) {
 gulp.task('watch', function() {
   gulp.watch(cssBuildFiles.concat(jsBuildFiles), ['build']);
 });
-
-function _minify(opts) {
-}
