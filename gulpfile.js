@@ -1,8 +1,8 @@
+/* eslint-env node */
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var rename = require('gulp-rename');
 var minifyJS = require('gulp-uglify');
-var minifyCSS = require('gulp-minify-css');
+var minifyCSS = require('gulp-clean-css');
 var deleteDirs = require('del');
 var runSequence = require('run-sequence');
 var autoprefixer = require('gulp-autoprefixer');
@@ -46,7 +46,7 @@ gulp.task('minify:css', function () {
     .pipe(gulp.dest(buildFolder));          // save under a new name
 });
 
-gulp.task('bump', function(callback) {
+gulp.task('bump', function() {
   return gulp.src(['./bower.json', './package.json'])
              .pipe(bump({'version': yargs.argv.tag}))
              .pipe(gulp.dest('./'))
@@ -61,7 +61,7 @@ gulp.task('verify', function(callback) {
   return runSequence('cleanup:begin', 'minify:js', 'minify:css', 'verify:diff', callback);
 });
 
-gulp.task('verify:diff', function(callback) {
+gulp.task('verify:diff', function() {
   return gulp.src('./build/*')
              .pipe(diff('./build-verify'))
              .pipe(diff.reporter({ fail: true }));
@@ -78,6 +78,3 @@ gulp.task('build:release', function(callback) {
 gulp.task('watch', function() {
   gulp.watch(cssBuildFiles.concat(jsBuildFiles), ['build']);
 });
-
-function _minify(opts) {
-}
