@@ -365,9 +365,9 @@
       }
 
       // returns true if `onComplete` was called
-      if (checkCallbackHooks.call(this)) {
+      if (checkCallbackHooks.call(this) && !this.options.revokable) {
         // user has already answered
-        //this.options.enabled = false;
+        this.options.enabled = false;
       }
 
       // apply blacklist / whitelist
