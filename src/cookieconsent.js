@@ -367,7 +367,7 @@
       // returns true if `onComplete` was called
       if (checkCallbackHooks.call(this)) {
         // user has already answered
-        this.options.enabled = false;
+        //this.options.enabled = false;
       }
 
       // apply blacklist / whitelist
@@ -570,9 +570,15 @@
       return val == cc.status.allow || val == cc.status.dismiss;
     };
 
-    // opens the popup if no answer has been given
+    // opens the popup if no answer has been given or adds Revoke
     CookiePopup.prototype.autoOpen = function(options) {
-      !this.hasAnswered() && this.options.enabled && this.open();
+      if (this.options.enabled) {
+        if (!this.hasAnswered()) {
+          this.open();
+        } else if (this.options.revokable) {
+          this.toggleRevokeButton(true);
+        }
+      }
     };
 
     CookiePopup.prototype.setStatus = function(status) {
