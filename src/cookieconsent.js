@@ -211,7 +211,7 @@
       onPopupClose: function() {},
       onInitialise: function(status) {},
       onStatusChange: function(status, chosenBefore) {},
-      onRevokeChoice: function() {},
+      onRevokeChoice: function(chosenBefore) {},
 
       // each item defines the inner text for the element that it references
       content: {
@@ -550,9 +550,10 @@
 
     CookiePopup.prototype.revokeChoice = function(preventOpen) {
       this.options.enabled = true;
+      var chosenBefore = this.getStatus();
       this.clearStatus();
 
-      this.options.onRevokeChoice.call(this);
+      this.options.onRevokeChoice.call(this, chosenBefore);
 
       if (!preventOpen) {
         this.autoOpen();
