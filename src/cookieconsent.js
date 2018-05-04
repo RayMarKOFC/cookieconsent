@@ -1,3 +1,4 @@
+/* eslint-env browser */
 (function(cc) {
   // stop from running again, if accidently included more than once.
   if (cc.hasInitialised) return;
